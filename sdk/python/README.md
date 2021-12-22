@@ -1,4 +1,4 @@
-# Vultr Resource Provider
+# Gandi Resource Provider
 
 The Gandi Resource Provider lets you manage
 [Gandi](https://www.gandi.com) resources. This is not an official
