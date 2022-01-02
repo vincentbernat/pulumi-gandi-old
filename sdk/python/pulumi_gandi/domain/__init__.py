@@ -10,5 +10,6 @@ from .domain import *
 from .get_domain import *
 from .get_glue_record import *
 from .glue_record import *
+from .nameservers import *
 from ._inputs import *
 from . import outputs

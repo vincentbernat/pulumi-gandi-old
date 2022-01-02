@@ -27,6 +27,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Domain{}
 	case "gandi:domain/glueRecord:GlueRecord":
 		r = &GlueRecord{}
+	case "gandi:domain/nameservers:Nameservers":
+		r = &Nameservers{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -53,6 +55,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"gandi",
 		"domain/glueRecord",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"gandi",
+		"domain/nameservers",
 		&module{version},
 	)
 }

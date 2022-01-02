@@ -887,6 +887,57 @@
                 "type": "object"
             }
         },
+        "gandi:domain/nameservers:Nameservers": {
+            "properties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n"
+                }
+            },
+            "required": [
+                "domain"
+            ],
+            "inputProperties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n"
+                }
+            },
+            "requiredInputs": [
+                "domain"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Nameservers resources.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "gandi:email/forwarding:Forwarding": {
             "properties": {
                 "destinations": {

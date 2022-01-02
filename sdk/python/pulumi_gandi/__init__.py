@@ -55,6 +55,14 @@ _utilities.register(
  },
  {
   "pkg": "gandi",
+  "mod": "domain/nameservers",
+  "fqn": "pulumi_gandi.domain",
+  "classes": {
+   "gandi:domain/nameservers:Nameservers": "Nameservers"
+  }
+ },
+ {
+  "pkg": "gandi",
   "mod": "email/forwarding",
   "fqn": "pulumi_gandi.email",
   "classes": {
