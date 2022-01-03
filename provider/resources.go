@@ -63,9 +63,16 @@ func Provider() tfbridge.ProviderInfo {
 		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"gandi_dnssec_key":             {Tok: tfbridge.MakeResource(mainPkg, domainMod, "DnssecKey")},
-			"gandi_domain":                 {Tok: tfbridge.MakeResource(mainPkg, domainMod, "Domain")},
-			"gandi_nameservers":            {Tok: tfbridge.MakeResource(mainPkg, domainMod, "Nameservers")},
+			"gandi_dnssec_key": {Tok: tfbridge.MakeResource(mainPkg, domainMod, "DnssecKey")},
+			"gandi_domain":     {Tok: tfbridge.MakeResource(mainPkg, domainMod, "Domain")},
+			"gandi_nameservers": {
+				Tok: tfbridge.MakeResource(mainPkg, domainMod, "Nameservers"),
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"nameservers": {
+						CSharpName: "Servers",
+					},
+				},
+			},
 			"gandi_glue_record":            {Tok: tfbridge.MakeResource(mainPkg, domainMod, "GlueRecord")},
 			"gandi_livedns_domain":         {Tok: tfbridge.MakeResource(mainPkg, livednsMod, "Domain")},
 			"gandi_livedns_record":         {Tok: tfbridge.MakeResource(mainPkg, livednsMod, "Record")},

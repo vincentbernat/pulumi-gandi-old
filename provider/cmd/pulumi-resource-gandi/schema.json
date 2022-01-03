@@ -898,7 +898,12 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of nameservers for the domain\n"
+                    "description": "A list of nameservers for the domain\n",
+                    "language": {
+                        "csharp": {
+                            "name": "Servers"
+                        }
+                    }
                 }
             },
             "required": [
@@ -914,7 +919,12 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of nameservers for the domain\n"
+                    "description": "A list of nameservers for the domain\n",
+                    "language": {
+                        "csharp": {
+                            "name": "Servers"
+                        }
+                    }
                 }
             },
             "requiredInputs": [
@@ -932,7 +942,12 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of nameservers for the domain\n"
+                        "description": "A list of nameservers for the domain\n",
+                        "language": {
+                            "csharp": {
+                                "name": "Servers"
+                            }
+                        }
                     }
                 },
                 "type": "object"
