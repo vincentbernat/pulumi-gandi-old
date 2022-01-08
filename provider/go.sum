@@ -254,10 +254,6 @@ github.com/gin-gonic/gin v1.6.3/go.mod h1:75u5sXoLsGZoRN5Sgbi1eraJ4GU3++wFwWzhwv
 github.com/gliderlabs/ssh v0.2.2 h1:6zsha5zo/TWhRhwqCD3+EarCAgZ2yN28ipRnGPnwkI0=
 github.com/gliderlabs/ssh v0.2.2/go.mod h1:U7qILu1NlMHj9FlMhZLlkCdDnU1DBEAqr0aevW3Awn0=
 github.com/go-asn1-ber/asn1-ber v1.3.1/go.mod h1:hEBeB/ic+5LoWskz+yKT7vGhhPYkProFKoKdwZRWMe0=
-github.com/go-gandi/go-gandi v0.0.0-20211230165416-1a297fd86f69 h1:sqOkTdRufgQYRM43qurk5zSrOBO1oZmcZ8g7jb+bGLY=
-github.com/go-gandi/go-gandi v0.0.0-20211230165416-1a297fd86f69/go.mod h1:9NoYyfWCjFosClPiWjkbbRK5UViaZ4ctpT8/pKSSFlw=
-github.com/go-gandi/terraform-provider-gandi v1.1.2-0.20211230172315-5378a78616de h1:ycxAl9xptqP9JHU2k4MEB/jU+f3nopMSl8plN13tBpQ=
-github.com/go-gandi/terraform-provider-gandi v1.1.2-0.20211230172315-5378a78616de/go.mod h1:pdOk61scwaF1z9+N75WTcgzyctybt+1KTQ5BUQ2wCnM=
 github.com/go-git/gcfg v1.5.0 h1:Q5ViNfGF8zFgyJWPqYwA7qGFoMTEiBmdlkcfRmpIMa4=
 github.com/go-git/gcfg v1.5.0/go.mod h1:5m20vg6GwYabIxaOonVkTdrILxQMpEShl1xiMF4ua+E=
 github.com/go-git/go-billy/v5 v5.2.0/go.mod h1:pmpqyWchKfYfrkb/UVH4otLvyi/5gJlGI4Hb3ZqZ3W0=
@@ -801,6 +797,10 @@ github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4A
 github.com/ulikunitz/xz v0.5.8 h1:ERv8V6GKqVi23rgu5cj9pVfVzJbOqAY2Ntl88O6c2nQ=
 github.com/ulikunitz/xz v0.5.8/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
 github.com/urfave/cli v0.0.0-20171014202726-7bc6a0acffa5/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
+github.com/vincentbernat/go-gandi v0.0.0-20220108220653-c49b75534f6f h1:0P/BwUK/3jP04GdgBoLidLKBmKfpYPi/vFctCjV5tOc=
+github.com/vincentbernat/go-gandi v0.0.0-20220108220653-c49b75534f6f/go.mod h1:9NoYyfWCjFosClPiWjkbbRK5UViaZ4ctpT8/pKSSFlw=
+github.com/vincentbernat/terraform-provider-gandi v1.1.2-0.20220108221411-d073d00f7ef0 h1:1B0woCa/kt0T4g32o75gCwUAqCf1via2g+M7ZT7XD2I=
+github.com/vincentbernat/terraform-provider-gandi v1.1.2-0.20220108221411-d073d00f7ef0/go.mod h1:pdOk61scwaF1z9+N75WTcgzyctybt+1KTQ5BUQ2wCnM=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.1+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=

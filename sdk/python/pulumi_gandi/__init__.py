@@ -87,6 +87,14 @@ _utilities.register(
  },
  {
   "pkg": "gandi",
+  "mod": "livedns/key",
+  "fqn": "pulumi_gandi.livedns",
+  "classes": {
+   "gandi:livedns/key:Key": "Key"
+  }
+ },
+ {
+  "pkg": "gandi",
   "mod": "livedns/record",
   "fqn": "pulumi_gandi.livedns",
   "classes": {

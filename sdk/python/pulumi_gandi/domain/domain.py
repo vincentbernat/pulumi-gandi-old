@@ -15,47 +15,37 @@ __all__ = ['DomainArgs', 'Domain']
 @pulumi.input_type
 class DomainArgs:
     def __init__(__self__, *,
-                 admins: pulumi.Input[Sequence[pulumi.Input['DomainAdminArgs']]],
-                 billings: pulumi.Input[Sequence[pulumi.Input['DomainBillingArgs']]],
                  owners: pulumi.Input[Sequence[pulumi.Input['DomainOwnerArgs']]],
-                 teches: pulumi.Input[Sequence[pulumi.Input['DomainTechArgs']]],
+                 admins: Optional[pulumi.Input[Sequence[pulumi.Input['DomainAdminArgs']]]] = None,
                  autorenew: Optional[pulumi.Input[bool]] = None,
+                 billings: Optional[pulumi.Input[Sequence[pulumi.Input['DomainBillingArgs']]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 nameservers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 nameservers: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 teches: Optional[pulumi.Input[Sequence[pulumi.Input['DomainTechArgs']]]] = None):
         """
         The set of arguments for constructing a Domain resource.
         :param pulumi.Input[bool] autorenew: Should the domain autorenew
         :param pulumi.Input[str] name: The FQDN of the domain
         :param pulumi.Input[Sequence[pulumi.Input[str]]] nameservers: A list of nameservers for the domain
         """
-        pulumi.set(__self__, "admins", admins)
-        pulumi.set(__self__, "billings", billings)
         pulumi.set(__self__, "owners", owners)
-        pulumi.set(__self__, "teches", teches)
+        if admins is not None:
+            pulumi.set(__self__, "admins", admins)
         if autorenew is not None:
             pulumi.set(__self__, "autorenew", autorenew)
+        if billings is not None:
+            pulumi.set(__self__, "billings", billings)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if nameservers is not None:
+            warnings.warn("""This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.""", DeprecationWarning)
+            pulumi.log.warn("""nameservers is deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.""")
+        if nameservers is not None:
             pulumi.set(__self__, "nameservers", nameservers)
-
-    @property
-    @pulumi.getter
-    def admins(self) -> pulumi.Input[Sequence[pulumi.Input['DomainAdminArgs']]]:
-        return pulumi.get(self, "admins")
-
-    @admins.setter
-    def admins(self, value: pulumi.Input[Sequence[pulumi.Input['DomainAdminArgs']]]):
-        pulumi.set(self, "admins", value)
-
-    @property
-    @pulumi.getter
-    def billings(self) -> pulumi.Input[Sequence[pulumi.Input['DomainBillingArgs']]]:
-        return pulumi.get(self, "billings")
-
-    @billings.setter
-    def billings(self, value: pulumi.Input[Sequence[pulumi.Input['DomainBillingArgs']]]):
-        pulumi.set(self, "billings", value)
+        if teches is not None:
+            pulumi.set(__self__, "teches", teches)
 
     @property
     @pulumi.getter
@@ -68,12 +58,12 @@ class DomainArgs:
 
     @property
     @pulumi.getter
-    def teches(self) -> pulumi.Input[Sequence[pulumi.Input['DomainTechArgs']]]:
-        return pulumi.get(self, "teches")
+    def admins(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainAdminArgs']]]]:
+        return pulumi.get(self, "admins")
 
-    @teches.setter
-    def teches(self, value: pulumi.Input[Sequence[pulumi.Input['DomainTechArgs']]]):
-        pulumi.set(self, "teches", value)
+    @admins.setter
+    def admins(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainAdminArgs']]]]):
+        pulumi.set(self, "admins", value)
 
     @property
     @pulumi.getter
@@ -86,6 +76,15 @@ class DomainArgs:
     @autorenew.setter
     def autorenew(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "autorenew", value)
+
+    @property
+    @pulumi.getter
+    def billings(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainBillingArgs']]]]:
+        return pulumi.get(self, "billings")
+
+    @billings.setter
+    def billings(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainBillingArgs']]]]):
+        pulumi.set(self, "billings", value)
 
     @property
     @pulumi.getter
@@ -110,6 +109,15 @@ class DomainArgs:
     @nameservers.setter
     def nameservers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "nameservers", value)
+
+    @property
+    @pulumi.getter
+    def teches(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DomainTechArgs']]]]:
+        return pulumi.get(self, "teches")
+
+    @teches.setter
+    def teches(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DomainTechArgs']]]]):
+        pulumi.set(self, "teches", value)
 
 
 @pulumi.input_type
@@ -136,6 +144,11 @@ class _DomainState:
             pulumi.set(__self__, "billings", billings)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if nameservers is not None:
+            warnings.warn("""This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.""", DeprecationWarning)
+            pulumi.log.warn("""nameservers is deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.""")
         if nameservers is not None:
             pulumi.set(__self__, "nameservers", nameservers)
         if owners is not None:
@@ -279,20 +292,19 @@ class Domain(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = DomainArgs.__new__(DomainArgs)
 
-            if admins is None and not opts.urn:
-                raise TypeError("Missing required property 'admins'")
             __props__.__dict__["admins"] = admins
             __props__.__dict__["autorenew"] = autorenew
-            if billings is None and not opts.urn:
-                raise TypeError("Missing required property 'billings'")
             __props__.__dict__["billings"] = billings
             __props__.__dict__["name"] = name
+            if nameservers is not None and not opts.urn:
+                warnings.warn("""This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.""", DeprecationWarning)
+                pulumi.log.warn("""nameservers is deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.""")
             __props__.__dict__["nameservers"] = nameservers
             if owners is None and not opts.urn:
                 raise TypeError("Missing required property 'owners'")
             __props__.__dict__["owners"] = owners
-            if teches is None and not opts.urn:
-                raise TypeError("Missing required property 'teches'")
             __props__.__dict__["teches"] = teches
         super(Domain, __self__).__init__(
             'gandi:domain/domain:Domain',
@@ -337,7 +349,7 @@ class Domain(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def admins(self) -> pulumi.Output[Sequence['outputs.DomainAdmin']]:
+    def admins(self) -> pulumi.Output[Optional[Sequence['outputs.DomainAdmin']]]:
         return pulumi.get(self, "admins")
 
     @property
@@ -350,7 +362,7 @@ class Domain(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def billings(self) -> pulumi.Output[Sequence['outputs.DomainBilling']]:
+    def billings(self) -> pulumi.Output[Optional[Sequence['outputs.DomainBilling']]]:
         return pulumi.get(self, "billings")
 
     @property
@@ -376,6 +388,6 @@ class Domain(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def teches(self) -> pulumi.Output[Sequence['outputs.DomainTech']]:
+    def teches(self) -> pulumi.Output[Optional[Sequence['outputs.DomainTech']]]:
         return pulumi.get(self, "teches")
 

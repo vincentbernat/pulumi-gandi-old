@@ -8,4 +8,5 @@ import typing
 from .domain import *
 from .get_domain import *
 from .get_nameservers import *
+from .key import *
 from .record import *

@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "gandi:livedns/domain:Domain":
 		r = &Domain{}
+	case "gandi:livedns/key:Key":
+		r = &Key{}
 	case "gandi:livedns/record:Record":
 		r = &Record{}
 	default:
@@ -41,6 +43,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"gandi",
 		"livedns/domain",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"gandi",
+		"livedns/key",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

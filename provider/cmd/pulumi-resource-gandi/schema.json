@@ -706,7 +706,8 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of nameservers for the domain\n"
+                    "description": "A list of nameservers for the domain\n",
+                    "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
                 },
                 "owners": {
                     "type": "array",
@@ -722,11 +723,8 @@
                 }
             },
             "required": [
-                "admins",
-                "billings",
                 "name",
-                "owners",
-                "teches"
+                "owners"
             ],
             "inputProperties": {
                 "admins": {
@@ -754,7 +752,8 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "A list of nameservers for the domain\n"
+                    "description": "A list of nameservers for the domain\n",
+                    "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
                 },
                 "owners": {
                     "type": "array",
@@ -770,10 +769,7 @@
                 }
             },
             "requiredInputs": [
-                "admins",
-                "billings",
-                "owners",
-                "teches"
+                "owners"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Domain resources.\n",
@@ -803,7 +799,8 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "A list of nameservers for the domain\n"
+                        "description": "A list of nameservers for the domain\n",
+                        "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
                     },
                     "owners": {
                         "type": "array",
@@ -1109,12 +1106,11 @@
                 },
                 "ttl": {
                     "type": "integer",
-                    "description": "The default TTL of the domain\n"
+                    "description": "The SOA TTL for the domain\n"
                 }
             },
             "required": [
-                "name",
-                "ttl"
+                "name"
             ],
             "inputProperties": {
                 "automaticSnapshots": {
@@ -1127,12 +1123,9 @@
                 },
                 "ttl": {
                     "type": "integer",
-                    "description": "The default TTL of the domain\n"
+                    "description": "The SOA TTL for the domain\n"
                 }
             },
-            "requiredInputs": [
-                "ttl"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Domain resources.\n",
                 "properties": {
@@ -1146,7 +1139,109 @@
                     },
                     "ttl": {
                         "type": "integer",
-                        "description": "The default TTL of the domain\n"
+                        "description": "The SOA TTL for the domain\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "gandi:livedns/key:Key": {
+            "properties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "DNSSEC algorithm type\n"
+                },
+                "algorithmName": {
+                    "type": "string",
+                    "description": "DNSSEC algorithm name\n"
+                },
+                "deleted": {
+                    "type": "boolean",
+                    "description": "Is the key deleted?\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "ds": {
+                    "type": "string",
+                    "description": "DS record as RFC1035 line\n"
+                },
+                "flags": {
+                    "type": "integer",
+                    "description": "DNSSEC key flags\n"
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "Public key\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Current status of the key\n"
+                },
+                "tag": {
+                    "type": "integer",
+                    "description": "Tag\n"
+                }
+            },
+            "required": [
+                "algorithm",
+                "algorithmName",
+                "deleted",
+                "domain",
+                "ds",
+                "flags",
+                "publicKey",
+                "status",
+                "tag"
+            ],
+            "inputProperties": {
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                }
+            },
+            "requiredInputs": [
+                "domain"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Key resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "integer",
+                        "description": "DNSSEC algorithm type\n"
+                    },
+                    "algorithmName": {
+                        "type": "string",
+                        "description": "DNSSEC algorithm name\n"
+                    },
+                    "deleted": {
+                        "type": "boolean",
+                        "description": "Is the key deleted?\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    },
+                    "ds": {
+                        "type": "string",
+                        "description": "DS record as RFC1035 line\n"
+                    },
+                    "flags": {
+                        "type": "integer",
+                        "description": "DNSSEC key flags\n"
+                    },
+                    "publicKey": {
+                        "type": "string",
+                        "description": "Public key\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Current status of the key\n"
+                    },
+                    "tag": {
+                        "type": "integer",
+                        "description": "Tag\n"
                     }
                 },
                 "type": "object"

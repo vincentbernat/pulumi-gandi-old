@@ -21,6 +21,9 @@ type Domain struct {
 	// The FQDN of the domain
 	Name pulumi.StringOutput `pulumi:"name"`
 	// A list of nameservers for the domain
+	//
+	// Deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+	// See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.
 	Nameservers pulumi.StringArrayOutput `pulumi:"nameservers"`
 	Owners      DomainOwnerArrayOutput   `pulumi:"owners"`
 	Teches      DomainTechArrayOutput    `pulumi:"teches"`
@@ -33,17 +36,8 @@ func NewDomain(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Admins == nil {
-		return nil, errors.New("invalid value for required argument 'Admins'")
-	}
-	if args.Billings == nil {
-		return nil, errors.New("invalid value for required argument 'Billings'")
-	}
 	if args.Owners == nil {
 		return nil, errors.New("invalid value for required argument 'Owners'")
-	}
-	if args.Teches == nil {
-		return nil, errors.New("invalid value for required argument 'Teches'")
 	}
 	var resource Domain
 	err := ctx.RegisterResource("gandi:domain/domain:Domain", name, args, &resource, opts...)
@@ -74,6 +68,9 @@ type domainState struct {
 	// The FQDN of the domain
 	Name *string `pulumi:"name"`
 	// A list of nameservers for the domain
+	//
+	// Deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+	// See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.
 	Nameservers []string      `pulumi:"nameservers"`
 	Owners      []DomainOwner `pulumi:"owners"`
 	Teches      []DomainTech  `pulumi:"teches"`
@@ -87,6 +84,9 @@ type DomainState struct {
 	// The FQDN of the domain
 	Name pulumi.StringPtrInput
 	// A list of nameservers for the domain
+	//
+	// Deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+	// See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.
 	Nameservers pulumi.StringArrayInput
 	Owners      DomainOwnerArrayInput
 	Teches      DomainTechArrayInput
@@ -104,6 +104,9 @@ type domainArgs struct {
 	// The FQDN of the domain
 	Name *string `pulumi:"name"`
 	// A list of nameservers for the domain
+	//
+	// Deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+	// See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.
 	Nameservers []string      `pulumi:"nameservers"`
 	Owners      []DomainOwner `pulumi:"owners"`
 	Teches      []DomainTech  `pulumi:"teches"`
@@ -118,6 +121,9 @@ type DomainArgs struct {
 	// The FQDN of the domain
 	Name pulumi.StringPtrInput
 	// A list of nameservers for the domain
+	//
+	// Deprecated: This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.
+	// See https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details.
 	Nameservers pulumi.StringArrayInput
 	Owners      DomainOwnerArrayInput
 	Teches      DomainTechArrayInput

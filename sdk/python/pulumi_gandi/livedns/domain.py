@@ -13,69 +13,14 @@ __all__ = ['DomainArgs', 'Domain']
 @pulumi.input_type
 class DomainArgs:
     def __init__(__self__, *,
-                 ttl: pulumi.Input[int],
-                 automatic_snapshots: Optional[pulumi.Input[bool]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
-        """
-        The set of arguments for constructing a Domain resource.
-        :param pulumi.Input[int] ttl: The default TTL of the domain
-        :param pulumi.Input[bool] automatic_snapshots: Enable or disable the automatic creation of snapshots when records are changed
-        :param pulumi.Input[str] name: The FQDN of the domain
-        """
-        pulumi.set(__self__, "ttl", ttl)
-        if automatic_snapshots is not None:
-            pulumi.set(__self__, "automatic_snapshots", automatic_snapshots)
-        if name is not None:
-            pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def ttl(self) -> pulumi.Input[int]:
-        """
-        The default TTL of the domain
-        """
-        return pulumi.get(self, "ttl")
-
-    @ttl.setter
-    def ttl(self, value: pulumi.Input[int]):
-        pulumi.set(self, "ttl", value)
-
-    @property
-    @pulumi.getter(name="automaticSnapshots")
-    def automatic_snapshots(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Enable or disable the automatic creation of snapshots when records are changed
-        """
-        return pulumi.get(self, "automatic_snapshots")
-
-    @automatic_snapshots.setter
-    def automatic_snapshots(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "automatic_snapshots", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> Optional[pulumi.Input[str]]:
-        """
-        The FQDN of the domain
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "name", value)
-
-
-@pulumi.input_type
-class _DomainState:
-    def __init__(__self__, *,
                  automatic_snapshots: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  ttl: Optional[pulumi.Input[int]] = None):
         """
-        Input properties used for looking up and filtering Domain resources.
+        The set of arguments for constructing a Domain resource.
         :param pulumi.Input[bool] automatic_snapshots: Enable or disable the automatic creation of snapshots when records are changed
         :param pulumi.Input[str] name: The FQDN of the domain
-        :param pulumi.Input[int] ttl: The default TTL of the domain
+        :param pulumi.Input[int] ttl: The SOA TTL for the domain
         """
         if automatic_snapshots is not None:
             pulumi.set(__self__, "automatic_snapshots", automatic_snapshots)
@@ -112,7 +57,63 @@ class _DomainState:
     @pulumi.getter
     def ttl(self) -> Optional[pulumi.Input[int]]:
         """
-        The default TTL of the domain
+        The SOA TTL for the domain
+        """
+        return pulumi.get(self, "ttl")
+
+    @ttl.setter
+    def ttl(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "ttl", value)
+
+
+@pulumi.input_type
+class _DomainState:
+    def __init__(__self__, *,
+                 automatic_snapshots: Optional[pulumi.Input[bool]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 ttl: Optional[pulumi.Input[int]] = None):
+        """
+        Input properties used for looking up and filtering Domain resources.
+        :param pulumi.Input[bool] automatic_snapshots: Enable or disable the automatic creation of snapshots when records are changed
+        :param pulumi.Input[str] name: The FQDN of the domain
+        :param pulumi.Input[int] ttl: The SOA TTL for the domain
+        """
+        if automatic_snapshots is not None:
+            pulumi.set(__self__, "automatic_snapshots", automatic_snapshots)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if ttl is not None:
+            pulumi.set(__self__, "ttl", ttl)
+
+    @property
+    @pulumi.getter(name="automaticSnapshots")
+    def automatic_snapshots(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable or disable the automatic creation of snapshots when records are changed
+        """
+        return pulumi.get(self, "automatic_snapshots")
+
+    @automatic_snapshots.setter
+    def automatic_snapshots(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "automatic_snapshots", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The FQDN of the domain
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def ttl(self) -> Optional[pulumi.Input[int]]:
+        """
+        The SOA TTL for the domain
         """
         return pulumi.get(self, "ttl")
 
@@ -136,13 +137,13 @@ class Domain(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] automatic_snapshots: Enable or disable the automatic creation of snapshots when records are changed
         :param pulumi.Input[str] name: The FQDN of the domain
-        :param pulumi.Input[int] ttl: The default TTL of the domain
+        :param pulumi.Input[int] ttl: The SOA TTL for the domain
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: DomainArgs,
+                 args: Optional[DomainArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a Domain resource with the given unique name, props, and options.
@@ -178,8 +179,6 @@ class Domain(pulumi.CustomResource):
 
             __props__.__dict__["automatic_snapshots"] = automatic_snapshots
             __props__.__dict__["name"] = name
-            if ttl is None and not opts.urn:
-                raise TypeError("Missing required property 'ttl'")
             __props__.__dict__["ttl"] = ttl
         super(Domain, __self__).__init__(
             'gandi:livedns/domain:Domain',
@@ -203,7 +202,7 @@ class Domain(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] automatic_snapshots: Enable or disable the automatic creation of snapshots when records are changed
         :param pulumi.Input[str] name: The FQDN of the domain
-        :param pulumi.Input[int] ttl: The default TTL of the domain
+        :param pulumi.Input[int] ttl: The SOA TTL for the domain
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -232,9 +231,9 @@ class Domain(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def ttl(self) -> pulumi.Output[int]:
+    def ttl(self) -> pulumi.Output[Optional[int]]:
         """
-        The default TTL of the domain
+        The SOA TTL for the domain
         """
         return pulumi.get(self, "ttl")
 

@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,20 +17,17 @@ type Domain struct {
 	AutomaticSnapshots pulumi.BoolPtrOutput `pulumi:"automaticSnapshots"`
 	// The FQDN of the domain
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The default TTL of the domain
-	Ttl pulumi.IntOutput `pulumi:"ttl"`
+	// The SOA TTL for the domain
+	Ttl pulumi.IntPtrOutput `pulumi:"ttl"`
 }
 
 // NewDomain registers a new resource with the given unique name, arguments, and options.
 func NewDomain(ctx *pulumi.Context,
 	name string, args *DomainArgs, opts ...pulumi.ResourceOption) (*Domain, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &DomainArgs{}
 	}
 
-	if args.Ttl == nil {
-		return nil, errors.New("invalid value for required argument 'Ttl'")
-	}
 	var resource Domain
 	err := ctx.RegisterResource("gandi:livedns/domain:Domain", name, args, &resource, opts...)
 	if err != nil {
@@ -58,7 +54,7 @@ type domainState struct {
 	AutomaticSnapshots *bool `pulumi:"automaticSnapshots"`
 	// The FQDN of the domain
 	Name *string `pulumi:"name"`
-	// The default TTL of the domain
+	// The SOA TTL for the domain
 	Ttl *int `pulumi:"ttl"`
 }
 
@@ -67,7 +63,7 @@ type DomainState struct {
 	AutomaticSnapshots pulumi.BoolPtrInput
 	// The FQDN of the domain
 	Name pulumi.StringPtrInput
-	// The default TTL of the domain
+	// The SOA TTL for the domain
 	Ttl pulumi.IntPtrInput
 }
 
@@ -80,8 +76,8 @@ type domainArgs struct {
 	AutomaticSnapshots *bool `pulumi:"automaticSnapshots"`
 	// The FQDN of the domain
 	Name *string `pulumi:"name"`
-	// The default TTL of the domain
-	Ttl int `pulumi:"ttl"`
+	// The SOA TTL for the domain
+	Ttl *int `pulumi:"ttl"`
 }
 
 // The set of arguments for constructing a Domain resource.
@@ -90,8 +86,8 @@ type DomainArgs struct {
 	AutomaticSnapshots pulumi.BoolPtrInput
 	// The FQDN of the domain
 	Name pulumi.StringPtrInput
-	// The default TTL of the domain
-	Ttl pulumi.IntInput
+	// The SOA TTL for the domain
+	Ttl pulumi.IntPtrInput
 }
 
 func (DomainArgs) ElementType() reflect.Type {

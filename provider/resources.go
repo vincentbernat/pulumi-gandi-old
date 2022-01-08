@@ -76,6 +76,7 @@ func Provider() tfbridge.ProviderInfo {
 			"gandi_glue_record":            {Tok: tfbridge.MakeResource(mainPkg, domainMod, "GlueRecord")},
 			"gandi_livedns_domain":         {Tok: tfbridge.MakeResource(mainPkg, livednsMod, "Domain")},
 			"gandi_livedns_record":         {Tok: tfbridge.MakeResource(mainPkg, livednsMod, "Record")},
+			"gandi_livedns_key":            {Tok: tfbridge.MakeResource(mainPkg, livednsMod, "Key")},
 			"gandi_mailbox":                {Tok: tfbridge.MakeResource(mainPkg, emailMod, "Mailbox")},
 			"gandi_email_forwarding":       {Tok: tfbridge.MakeResource(mainPkg, emailMod, "Forwarding")},
 			"gandi_simplehosting_instance": {Tok: tfbridge.MakeResource(mainPkg, simplehostingMod, "Instance")},
